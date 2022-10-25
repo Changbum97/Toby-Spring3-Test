@@ -12,6 +12,25 @@ public class UserDao_useInterface {
         this.connectionMaker = connectionMaker;
     }
 
+    public void deleteAll() throws SQLException {
+        Connection conn = connectionMaker.makeConnection();
+        PreparedStatement ps = null;
+
+        try {
+            ps = conn.prepareStatement("DELETE FROM users");
+
+            ps.executeUpdate();
+            System.out.println("Delete All 성공");
+
+            ps.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            throw new SQLException("Delete All 실패");
+        }
+
+    }
+
     public void add(User user) throws SQLException {
         Connection conn = connectionMaker.makeConnection();
         PreparedStatement ps = null;
@@ -24,30 +43,50 @@ public class UserDao_useInterface {
             ps.setString(3, user.getPassword());
 
         } catch (SQLException e) {
-            System.out.println("Insert문 생성 실패");
-            throw new SQLException();
+            throw new SQLException("Insert문 생성 실패");
         }
 
         try {
             ps.executeUpdate();
-            System.out.println("DB Insert 완료");
+            System.out.println("Insert 성공");
 
             ps.close();
             conn.close();
 
         } catch (SQLIntegrityConstraintViolationException e) {
-            System.out.println("id 중복");
-            throw new SQLIntegrityConstraintViolationException();
+            throw new SQLIntegrityConstraintViolationException("ID 중복");
         } catch (SQLException e) {
-            System.out.println("Inset 실패");
-            throw new SQLException();
+            throw new SQLException("Insert 실패");
+        }
+    }
+
+    public int getCount() throws SQLException {
+        Connection conn = connectionMaker.makeConnection();
+        PreparedStatement ps = null;
+
+        try {
+            ps = conn.prepareStatement("SELECT COUNT(*) FROM users");
+
+
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int cnt = rs.getInt(1);
+            System.out.println("Get Count 성공");
+
+            rs.close();
+            ps.close();
+            conn.close();
+
+            return cnt;
+
+        } catch (SQLException e) {
+            throw new SQLException("Get Count 실패");
         }
     }
 
     public User findById(String id) throws SQLException {
         Connection conn = connectionMaker.makeConnection();
         PreparedStatement ps = null;
-
 
         try {
             ps = conn.prepareStatement("SELECT * FROM users WHERE id = ?;");
@@ -65,7 +104,7 @@ public class UserDao_useInterface {
                 System.out.println("FindById 완료");
                 user = new User(rs.getString("id"), rs.getString("name"), rs.getString("password"));
             } else {
-                System.out.println("Id에 해당하는 User 없음");
+                throw new SQLException("Id에 해당하는 User 없음");
             }
 
             rs.close();
