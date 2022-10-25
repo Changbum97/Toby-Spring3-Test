@@ -29,3 +29,8 @@
    - 이러면 add, deleteAll, getCount 등 각각의 기능마다 클래스 생성할 필요 없어짐
    - UserDao04 에 deleteAll2 메소드에 적용
    - UserDaoTest06 에서 테스트 진행
+9. JdbcContext 분리
+   - UserDao05는 UserDao04에 있었던 jdbcContextWithStatementStrategy 메소드를 JdbcContext 클래스로 따로 분리한 코드
+   - UserDao05의 deleteAll, add에는 익명 클래스 적용
+   - getCount에는 아무 아직 StatementStrategy까지 적용된 상황
+   - UserFactory06 에서 조립 후 UserDaoTest07 에서 테스트 진행
