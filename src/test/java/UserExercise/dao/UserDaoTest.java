@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.SQLException;
 
@@ -16,7 +17,7 @@ class UserDaoTest {
 
     @Test
     @DisplayName("add, findById, deleteAll, getCount Test")
-    void test01() throws SQLException {
+    void test() throws SQLException {
         // Interface 사용
         // UserDao_useInterface userDao = new UserDao_useInterface(new LocalConnectionMaker());
 
@@ -45,5 +46,16 @@ class UserDaoTest {
         // delteAll Test
         userDao.deleteAll();
         assertEquals(0, userDao.getCount());
+    }
+
+    @Test
+    @DisplayName("user == null인 경우 Exception 발생 Test")
+    void exceptionTest() throws SQLException {
+        UserDao_useInterface userDao = new UserDaoFactory().localUserDao();
+        userDao.deleteAll();
+
+        assertThrows(EmptyResultDataAccessException.class, () -> {
+            userDao.findById("1");
+        });
     }
 }

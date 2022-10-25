@@ -2,6 +2,7 @@ package UserExercise.dao;
 
 import UserExercise.dao.useInterface.ConnectionMaker;
 import UserExercise.domain.User;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.*;
 
@@ -84,7 +85,7 @@ public class UserDao_useInterface {
         }
     }
 
-    public User findById(String id) throws SQLException {
+    public User findById(String id) throws SQLException, EmptyResultDataAccessException {
         Connection conn = connectionMaker.makeConnection();
         PreparedStatement ps = null;
 
@@ -104,7 +105,8 @@ public class UserDao_useInterface {
                 System.out.println("FindById 완료");
                 user = new User(rs.getString("id"), rs.getString("name"), rs.getString("password"));
             } else {
-                throw new SQLException("Id에 해당하는 User 없음");
+                System.out.println("해당 User 없음");
+                throw new EmptyResultDataAccessException(1);
             }
 
             rs.close();
