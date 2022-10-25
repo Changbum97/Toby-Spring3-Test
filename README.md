@@ -40,7 +40,7 @@
     - UserDaoFactory07 에서 조립 후 UserDaoTest08 에서 테스트 진행
 11. Jdbc Template 적용
     - 우리가 지금까지 한 모든 과정은 사실 JAVA에서 미리 Jdbc Template으로 준비되어 있음
-    - Jdbc Template을 적용하면 우리가 만든 모든 코드가 필요 없어짐
+    - Jdbc Template을 적용하면 우리가 지금까지 만든 거의 모든 코드가 필요 없어짐
     - UserDao_Final 에서 JdbcTemplate을 적용
     - UserDaoFactory_Final 에서 UserDao_Final 조립
     - UserDaoTest_Final 에서 UserDao_Final의 모든 기능 테스트
