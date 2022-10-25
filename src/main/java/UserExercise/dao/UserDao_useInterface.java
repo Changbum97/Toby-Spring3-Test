@@ -12,7 +12,7 @@ public class UserDao_useInterface {
         this.connectionMaker = connectionMaker;
     }
 
-    public void add(User user) {
+    public void add(User user) throws SQLException {
         Connection conn = connectionMaker.makeConnection();
         PreparedStatement ps = null;
 
@@ -25,7 +25,7 @@ public class UserDao_useInterface {
 
         } catch (SQLException e) {
             System.out.println("Insert문 생성 실패");
-            return;
+            throw new SQLException();
         }
 
         try {
@@ -37,14 +37,14 @@ public class UserDao_useInterface {
 
         } catch (SQLIntegrityConstraintViolationException e) {
             System.out.println("id 중복");
-            return;
+            throw new SQLIntegrityConstraintViolationException();
         } catch (SQLException e) {
             System.out.println("Inset 실패");
-            return;
+            throw new SQLException();
         }
     }
 
-    public User findById(String id) {
+    public User findById(String id) throws SQLException {
         Connection conn = connectionMaker.makeConnection();
         PreparedStatement ps = null;
 
@@ -54,7 +54,7 @@ public class UserDao_useInterface {
             ps.setString(1, id);
         } catch (SQLException e) {
             System.out.println("SELECT문 생성 실패");
-            throw new RuntimeException(e);
+            throw new SQLException();
         }
 
         try {
@@ -76,7 +76,7 @@ public class UserDao_useInterface {
 
         } catch (SQLException e) {
             System.out.println("FindById 실패");
-            throw new RuntimeException(e);
+            throw new SQLException();
         }
     }
 }
