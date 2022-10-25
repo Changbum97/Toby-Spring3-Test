@@ -22,4 +22,13 @@ public class User {
     public String getPassword() {
         return password;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        User user = (User) obj;
+        if(this.id.equals(user.id) && this.name.equals(user.name) && this.password.equals(user.password)) {
+            return true;
+        }
+        return false;
+    }
 }

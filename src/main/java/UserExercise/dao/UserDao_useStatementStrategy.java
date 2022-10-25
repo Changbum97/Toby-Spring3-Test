@@ -1,14 +1,13 @@
 package UserExercise.dao;
 
 import UserExercise.dao.useInterface.ConnectionMaker;
-import UserExercise.dao.useStrategy.AddStrategy;
-import UserExercise.dao.useStrategy.DeleteAllStrategy;
-import UserExercise.dao.useStrategy.FindByIdStrategy;
-import UserExercise.dao.useStrategy.GetCountStrategy;
+import UserExercise.dao.useStrategy.*;
 import UserExercise.domain.User;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDao_useStatementStrategy {
     ConnectionMaker connectionMaker;
@@ -116,6 +115,40 @@ public class UserDao_useStatementStrategy {
 
         } catch (SQLException e) {
             System.out.println("FindById 실패");
+            throw new SQLException();
+        }
+    }
+
+    public List<User> findAll() throws SQLException {
+        Connection conn = connectionMaker.makeConnection();
+        PreparedStatement ps = null;
+
+        try {
+            ps = new FindAllStrategy().makePreparedStatement(conn);
+
+        } catch (SQLException e) {
+            System.out.println("SELECT문 생성 실패");
+            throw new SQLException();
+        }
+
+        try {
+            ResultSet rs = ps.executeQuery();
+
+            List<User> users = new ArrayList<>();
+            while(rs.next()) {
+                users.add(new User(rs.getString("id"), rs.getString("name"), rs.getString("password")));
+            }
+
+            System.out.println("Find All 완료");
+
+            rs.close();
+            ps.close();
+            conn.close();
+
+            return users;
+
+        } catch (SQLException e) {
+            System.out.println("Find All 실패");
             throw new SQLException();
         }
     }

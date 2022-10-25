@@ -13,8 +13,8 @@ public class UserDaoFactory_useSpring {
     }
 
     @Bean
-    public UserDao_useInterface localUserDao_useStatementStrategy() {
-        return new UserDao_useInterface(new LocalConnectionMaker());
+    public UserDao_useStatementStrategy localUserDao_useStatementStrategy() {
+        return new UserDao_useStatementStrategy(new LocalConnectionMaker());
     }
 
 }
