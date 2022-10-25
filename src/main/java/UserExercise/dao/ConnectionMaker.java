@@ -1,2 +1,7 @@
-package UserExercise.dao;public interface ConnectionMaker {
+package UserExercise.dao;
+
+import java.sql.Connection;
+
+public interface ConnectionMaker {
+    Connection makeConnection();
 }
