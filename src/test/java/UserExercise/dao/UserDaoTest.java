@@ -19,7 +19,7 @@ class UserDaoTest {
         // UserDao_useInterface userDao = new UserDao_useInterface(new LocalConnectionMaker());
 
         // Factory 사용
-        UserDao_useInterface userDao = new UserDaoFactory().localUserDao();
+        UserDao01 userDao = new UserDaoFactory01().localUserDao();
 
 
         // userDao Test 시작
@@ -48,7 +48,7 @@ class UserDaoTest {
     @Test
     @DisplayName("user == null인 경우 Exception 발생 Test")
     void exceptionTest() throws SQLException {
-        UserDao_useInterface userDao = new UserDaoFactory().localUserDao();
+        UserDao01 userDao = new UserDaoFactory01().localUserDao();
         userDao.deleteAll();
 
         assertThrows(EmptyResultDataAccessException.class, () -> {
