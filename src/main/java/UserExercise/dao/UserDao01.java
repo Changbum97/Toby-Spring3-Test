@@ -6,10 +6,10 @@ import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.*;
 
-public class UserDao_useInterface {
+public class UserDao01 {
     ConnectionMaker connectionMaker;
 
-    public UserDao_useInterface(ConnectionMaker connectionMaker) {
+    public UserDao01(ConnectionMaker connectionMaker) {
         this.connectionMaker = connectionMaker;
     }
 
