@@ -14,3 +14,7 @@
 5. Statement Strategy를 적용한 UserDao02 생성
    - UserDao02를 조립하는 UserDaoFactory03 생성
    - UserDaoTest04 에서 테스트 진행
+6. jdbcContextWithStatementStrategy와 try/catch/finally를 적용해 리소스를 반환한 UserDao03 생성
+   - UserDao03을 조립하는 UserDaoFactory04 생성
+   - ps.exectueUpdate가 고정이기 때문에 add, deleteAll만 가능
+   - 따라서 별도의 테스트 진행 X
