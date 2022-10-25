@@ -1,4 +1,4 @@
-package UserExercise.dao;
+package UserExercise.dao.useInterface;
 
 import java.sql.Connection;
 
