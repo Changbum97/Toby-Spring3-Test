@@ -37,4 +37,21 @@ class UserDaoTest06 {
         assertEquals(0, userDao.getCount());
     }
 
+    @Test
+    @DisplayName("delete All 익명 클래스 적용 Test")
+    void test02() throws SQLException {
+        UserDao04 userDao = context.getBean("localUserDao", UserDao04.class);
+
+        userDao.deleteAll2();
+
+        userDao.add(new User("1", "AAA", "1234"));
+        userDao.add(new User("2", "BBB", "4321"));
+
+        assertEquals(2, userDao.getCount());
+
+        userDao.deleteAll2();
+        assertEquals(0, userDao.getCount());
+        assertEquals(0, userDao.getCount());
+    }
+
 }

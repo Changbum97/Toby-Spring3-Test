@@ -24,3 +24,8 @@
    - DataSource에 Driver Class, URL, name, password 만 넣고 getConnection으로 받아 사용하면 됨
    - UserDao04, UserDaoFactory05 에서 적용
    - UserDaoTest06 에서 테스트 진행
+8. deleteAll 익명 클래스 적용
+   - 이제 StatementStrategy Interface를 상속받은 DeleteAllStrategy를 사용 안하고 그 자리에 익명 클래스 적용
+   - 이러면 add, deleteAll, getCount 등 각각의 기능마다 클래스 생성할 필요 없어짐
+   - UserDao04 에 deleteAll2 메소드에 적용
+   - UserDaoTest06 에서 테스트 진행
