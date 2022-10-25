@@ -17,7 +17,14 @@ class UserDaoTest {
     @Test
     @DisplayName("add, findById, deleteAll, getCount Test")
     void test01() throws SQLException {
+        // Interface 사용
+        // UserDao_useInterface userDao = new UserDao_useInterface(new LocalConnectionMaker());
+
+        // Factory 사용
         UserDao_useInterface userDao = new UserDaoFactory().localUserDao();
+
+
+        // userDao Test 시작
         userDao.deleteAll();
 
         User user = new User("1", "Changbum", "1234");
