@@ -5,11 +5,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class UserDaoFactory_useSpring {
+public class UserDaoFactory02 {
 
     @Bean
-    public UserDao_useInterface localUserDao_useInterface() {
-        return new UserDao_useInterface(new LocalConnectionMaker());
+    public UserDao01 localUserDao_useInterface() {
+        return new UserDao01(new LocalConnectionMaker());
     }
 
     @Bean

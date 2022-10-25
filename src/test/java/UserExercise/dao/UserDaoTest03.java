@@ -7,17 +7,20 @@ import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 
-class UserDaoTest02 {
+class UserDaoTest {
 
     @Test
     @DisplayName("add, findById, deleteAll, getCount Test")
     void test() throws SQLException {
+        // Interface 사용
+        // UserDao_useInterface userDao = new UserDao_useInterface(new LocalConnectionMaker());
+
         // Factory 사용
-        UserDao01 userDao = new UserDaoFactory01().localUserDao();
+        UserDao01 userDao = new UserDaoFactory().localUserDao();
+
 
         // userDao Test 시작
         userDao.deleteAll();
@@ -45,7 +48,7 @@ class UserDaoTest02 {
     @Test
     @DisplayName("user == null인 경우 Exception 발생 Test")
     void exceptionTest() throws SQLException {
-        UserDao01 userDao = new UserDaoFactory01().localUserDao();
+        UserDao01 userDao = new UserDaoFactory().localUserDao();
         userDao.deleteAll();
 
         assertThrows(EmptyResultDataAccessException.class, () -> {
