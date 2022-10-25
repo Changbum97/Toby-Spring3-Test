@@ -11,4 +11,5 @@ public class UserDaoFactory02 {
     public UserDao01 localUserDao() {
         return new UserDao01(new LocalConnectionMaker());
     }
+
 }

@@ -3,24 +3,31 @@ package UserExercise.dao;
 import UserExercise.domain.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = UserDaoFactory02.class)
+class UserDaoTest03 {
 
-class UserDaoTest {
+    @Autowired
+    ApplicationContext context;
 
     @Test
     @DisplayName("add, findById, deleteAll, getCount Test")
     void test() throws SQLException {
-        // Interface 사용
-        // UserDao_useInterface userDao = new UserDao_useInterface(new LocalConnectionMaker());
 
-        // Factory 사용
-        UserDao01 userDao = new UserDaoFactory().localUserDao();
-
+        // Spring 적용
+        UserDao01 userDao = context.getBean("localUserDao", UserDao01.class);
 
         // userDao Test 시작
         userDao.deleteAll();
@@ -48,7 +55,7 @@ class UserDaoTest {
     @Test
     @DisplayName("user == null인 경우 Exception 발생 Test")
     void exceptionTest() throws SQLException {
-        UserDao01 userDao = new UserDaoFactory().localUserDao();
+        UserDao01 userDao = context.getBean("localUserDao", UserDao01.class);
         userDao.deleteAll();
 
         assertThrows(EmptyResultDataAccessException.class, () -> {
