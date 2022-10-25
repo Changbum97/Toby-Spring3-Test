@@ -14,6 +14,15 @@ public class JdbcContext {
         this.dataSource = dataSource;
     }
 
+    public void executeSql(String sql) {
+        this.workWithStatementStrategy(new StatementStrategy() {
+            @Override
+            public PreparedStatement makePreparedStatement(Connection conn) throws SQLException {
+                return conn.prepareStatement(sql);
+            }
+        });
+    }
+
     // executeUpdate 사용하는 쿼리 실행
     public void workWithStatementStrategy(StatementStrategy stmt) {
         Connection conn = null;

@@ -34,3 +34,8 @@
    - UserDao05의 deleteAll, add에는 익명 클래스 적용
    - getCount에는 아무 아직 StatementStrategy까지 적용된 상황
    - UserFactory06 에서 조립 후 UserDaoTest07 에서 테스트 진행
+10. JdbcContext에 executeSql 메소드 추가
+   - UserDao에서는 executeSql에 sql Query만 넘겨주고, 이 메소드에서 workWithStatementStrategy를 호출해서 쿼리 실행
+   - UserDao06의 deleteAll, add에서는 String 타입의 sql Query를 만들어 넘겨주기만 하면 됨
+   - UserDaoFactory07 에서 조립 후 UserDaoTest08 에서 테스트 진행
+11. Jdbc Template 적용
