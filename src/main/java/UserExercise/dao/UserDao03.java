@@ -61,4 +61,27 @@ public class UserDao03 {
         jdbcContextWithStatementStrategy(new AddStrategy(user));
     }
 
+    public int getCount() throws SQLException {
+        Connection conn = connectionMaker.makeConnection();
+        PreparedStatement ps = null;
+
+        try {
+            ps = new GetCountStrategy().makePreparedStatement(conn);
+
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int cnt = rs.getInt(1);
+            System.out.println("Get Count 성공");
+
+            rs.close();
+            ps.close();
+            conn.close();
+
+            return cnt;
+
+        } catch (SQLException e) {
+            throw new SQLException("Get Count 실패");
+        }
+    }
+
 }

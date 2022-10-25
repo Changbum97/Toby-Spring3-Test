@@ -18,6 +18,7 @@ public class UserDaoFactory05 {
     @Bean
     public DataSource localDataSource() {
         SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
+        dataSource.setDriverClass(com.mysql.cj.jdbc.Driver.class);
         dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/likelion-db");
         dataSource.setUsername("root");
         dataSource.setPassword("root1234");

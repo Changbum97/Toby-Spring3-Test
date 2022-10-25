@@ -17,4 +17,10 @@
 6. jdbcContextWithStatementStrategy와 try/catch/finally를 적용해 리소스를 반환한 UserDao03 생성
    - UserDao03을 조립하는 UserDaoFactory04 생성
    - ps.exectueUpdate가 고정이기 때문에 add, deleteAll만 가능
-   - 따라서 별도의 테스트 진행 X
+   - getCount는 jdbcContextWithStatementStrategy 일단 적용 안하고 테스트 진행
+   - UserDaoTest05 에서 테스트 진행
+7. DataSource 사용
+   - 우리가 직접 만들어 준 ConnectionMaker 기능이 JAVA 에서 이미 DataSource로 구현되어 있음
+   - DataSource에 Driver Class, URL, name, password 만 넣고 getConnection으로 받아 사용하면 됨
+   - UserDao04, UserDaoFactory05 에서 적용
+   - UserDaoTest06 에서 테스트 진행
