@@ -1,2 +1,5 @@
-package UserExercise.dao;public class UserDao {
+package UserExercise.dao;
+
+public class UserDao {
+    private
 }
